@@ -5,3 +5,15 @@
 [![Open in Dev Container](https://raw.githubusercontent.com/ministryofjustice/.devcontainer/refs/heads/main/contrib/badge.svg)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/ministryofjustice/pagerduty-rota-notifier)
 
 [![Open in Codespace](https://github.com/codespaces/badge.svg)](https://codespaces.new/ministryofjustice/pagerduty-rota-notifier)
+
+This repository contains the code and a scheduled GitHub Actions workflow for sending a notification to a Slack channel
+
+![Example message from Slack](/contrib/example-slack-message.png)
+
+## Using
+
+To use this for your team's PagerDuty rota:
+
+1. Add your PagerDuty rota ID and Slack channel to the matrix in [`.github/workflows/pagerduty-rota-notifier.yml`](.github/workflows/pagerduty-rota-notifier.yml)
+
+1. Invite `@PagerDuty Rota` to your Slack channel
