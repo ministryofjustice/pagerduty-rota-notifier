@@ -1,8 +1,14 @@
+"""
+This module interacts with PagerDuty and Slack APIs to
+fetch on-call schedules and notify the relevant Slack channel.
+"""
+
 import os
 from time import strftime
-
 from pdpyras import APISession
+from slack_sdk.errors import SlackApiError
 from slack_sdk import WebClient
+
 
 date = strftime("%Y-%m-%d")
 
@@ -17,7 +23,14 @@ slack_client = WebClient(token=slack_token)
 
 
 def get_on_call_schedule_name():
+    """
+    Fetches the name of the on-call schedule from PagerDuty.
+
+    Returns:
+        str: The name of the on-call schedule.
+    """
     response = pagerduty_client.get("/schedules/" + pagerduty_scedule_id)
+    schedule_name = None
 
     if response.ok:
         schedule_name = response.json()["schedule"]["name"]
@@ -26,6 +39,12 @@ def get_on_call_schedule_name():
 
 
 def get_on_call_user():
+    """
+    Fetches the name and email of the on-call user from PagerDuty.
+
+    Returns:
+        tuple: A tuple containing the name and email of the on-call user.
+    """
     response = pagerduty_client.get(
         "/schedules/"
         + pagerduty_scedule_id
@@ -46,18 +65,27 @@ def get_on_call_user():
 
 
 def get_slack_user_id():
+    """
+    Fetches the Slack user ID of the on-call user based on their email.
+
+    Returns:
+        str: The Slack user ID of the on-call user.
+    """
     user_id = None
 
     try:
         response = slack_client.users_lookupByEmail(email=get_on_call_user()[1])
         user_id = response["user"]["id"]
-    except Exception:
+    except SlackApiError:
         pass
 
     return user_id
 
 
 def main():
+    """
+    Main function to post a message to the Slack channel about the on-call user.
+    """
     if get_slack_user_id() is None:
         message = (
             f"{get_on_call_user()[0]} is on support for {get_on_call_schedule_name()}"
