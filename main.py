@@ -5,10 +5,10 @@ fetch on-call schedules and notify the relevant Slack channel.
 
 import os
 from time import strftime
-from pdpyras import APISession
-from slack_sdk.errors import SlackApiError
-from slack_sdk import WebClient
 
+from pdpyras import APISession
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 date = strftime("%Y-%m-%d")
 
