@@ -8,3 +8,8 @@ dependencies = [
     "pdpyras==5.4.0",
     "slack-sdk==3.35.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff==0.11.2",
+]
