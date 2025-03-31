@@ -8,6 +8,8 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "python.defaultInterpreterPath": "/workspaces/pagerduty-rota-notifier/.venv/bin/python",
+        "python.terminal.activateEnvInCurrentTerminal": true,
         "python.venvFolders": ["/workspaces/pagerduty-rota-notifier/.venv"]
       },
       "extensions": [
