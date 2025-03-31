@@ -1,0 +1,10 @@
+[project]
+name = "pagerduty-rota-notifier"
+version = "0.1.0"
+description = "PagerDuty Rota Notifier"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pdpyras==5.4.0",
+    "slack-sdk==3.35.0",
+]

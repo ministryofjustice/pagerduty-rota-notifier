@@ -16,10 +16,10 @@ updates:
     commit-message:
       prefix: ":dependabot: devcontainers"
       include: "scope"
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/"
     schedule:
       interval: "daily"
     commit-message:
-      prefix: ":dependabot: pip"
+      prefix: ":dependabot: uv"
       include: "scope"
