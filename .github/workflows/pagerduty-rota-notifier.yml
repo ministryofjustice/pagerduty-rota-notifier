@@ -7,11 +7,6 @@ on:
     - cron: "0 8 * * 1-5" # Monday-Friday at 08:00 UTC, or 09:00 BST
   workflow_dispatch:
 
-  ### DEBUG
-  pull_request:
-    branches:
-      - main
-
 permissions: {}
 
 jobs:
@@ -43,5 +38,5 @@ jobs:
         env:
           PAGERDUTY_SCHEDULE_ID: ${{ matrix.pagerduty-schedule-id }}
           PAGERDUTY_TOKEN: ${{ secrets.PAGERDUTY_TOKEN }}
-          # SLACK_CHANNEL: ${{ matrix.slack-channel }}
-          # SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CHANNEL: ${{ matrix.slack-channel }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
