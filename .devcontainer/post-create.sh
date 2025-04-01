@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-pip install --requirement requirements-dev.txt
+uv sync --frozen
+
+uv run pre-commit install
