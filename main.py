@@ -2,7 +2,6 @@
 This module interacts with PagerDuty and Slack APIs to
 fetch on-call schedules and notify the relevant Slack channel.
 """
-
 import os
 from time import strftime
 
@@ -21,7 +20,6 @@ slack_token = os.environ["SLACK_TOKEN"]
 pagerduty_client = APISession(pagerduty_token)
 slack_client = WebClient(token=slack_token)
 
-
 def get_on_call_schedule_name():
     """
     Fetches the name of the on-call schedule from PagerDuty.
@@ -36,7 +34,6 @@ def get_on_call_schedule_name():
         schedule_name = response.json()["schedule"]["name"]
 
     return schedule_name
-
 
 def get_on_call_user():
     """
