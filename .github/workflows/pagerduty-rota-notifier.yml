@@ -22,6 +22,10 @@ jobs:
             slack-channel: C04M8224WCV # analytical-platform
           - pagerduty-schedule-id: PW7Q2MF # Find MoJ Data Daily Support
             slack-channel: C03QZ776JVA # data-catalogue
+          - pagerduty-schedule-id: PXQTX9B # Data Engineering Support SEO
+            slack-channel: C08M8JCR1RN # de-support-pagerduty-test
+          - pagerduty-schedule-id: PAMEXM1 # Data Engineering Support G7
+            slack-channel: C08M8JCR1RN # de-support-pagerduty-test
     steps:
       - name: Checkout
         id: checkout
