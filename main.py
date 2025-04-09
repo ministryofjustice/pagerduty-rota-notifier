@@ -75,7 +75,7 @@ def get_slack_user_id():
 
     # get a user's email prefix
     email = get_on_call_user()[1]
-    user_email_pref = email.split('@')[0]
+    user_email_pref = email.split("@")[0]
 
     # suffixes for email addresses
     digital_suff = "@justice.gov.uk"
