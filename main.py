@@ -99,19 +99,22 @@ def main():
     """
     Main function to post a message to the Slack channel about the on-call user.
     """
-    if get_slack_user_id() is None:
+    slack_user_ids = get_slack_user_id()
+
+    if not slack_user_ids:
         message = (
             f"{get_on_call_user()[0]} is on support for {get_on_call_schedule_name()}"
         )
-    
+
     # if a user has 2 Slack accounts against their email prefix, both will receive a notification
-    elif len(get_slack_user_id()) > 1:
+    elif len(slack_user_ids) > 1:
         message = (
-            f"<@{get_slack_user_id()[0]}> / <@{get_slack_user_id()[1]}> is on support for {get_on_call_schedule_name()}"
+            f"""<@{slack_user_ids[0]}> / <@{slack_user_ids()[1]}> is on 
+            support for {get_on_call_schedule_name()}"""
         )
     else:
         message = (
-            f"<@{get_slack_user_id()[0]}> is on support for {get_on_call_schedule_name()}"
+            f"<@{slack_user_ids[0]}> is on support for {get_on_call_schedule_name()}"
         )
 
     slack_client.chat_postMessage(
