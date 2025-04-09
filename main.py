@@ -12,7 +12,7 @@ from slack_sdk.errors import SlackApiError
 
 date = strftime("%Y-%m-%d")
 
-pagerduty_scedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
+pagerduty_schedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
 pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 
 slack_channel = os.environ["SLACK_CHANNEL"]
@@ -29,7 +29,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_scedule_id)
+    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
     schedule_name = None
 
     if response.ok:
@@ -47,7 +47,7 @@ def get_on_call_user():
     """
     response = pagerduty_client.get(
         "/schedules/"
-        + pagerduty_scedule_id
+        + pagerduty_schedule_id
         + "/users?since="
         + date
         + "T09%3A00Z&until="
@@ -71,15 +71,17 @@ def get_slack_user_id():
     Returns:
         list: A list of Slack user IDs for the on-call user.
     """
-
-    digital_suff = "@justice.gov.uk"
-    justice_suff = "@digital.justice.gov.uk"
-
     user_ids = []
+
+    # get a user's email prefix
     email = get_on_call_user()[1]
     user_email_pref = email.split('@')[0]
 
-    # gets ids for both digital and justice email addresses.
+    # suffixes for email addresses
+    digital_suff = "@justice.gov.uk"
+    justice_suff = "@digital.justice.gov.uk"
+
+    # defines ids for both digital and justice email addresses
     justice_email = user_email_pref + digital_suff
     digital_email = user_email_pref + justice_suff
 
@@ -102,7 +104,7 @@ def main():
             f"{get_on_call_user()[0]} is on support for {get_on_call_schedule_name()}"
         )
     
-    # if a user has 2 Slack accounts against their email prefix, both will receive a notification.
+    # if a user has 2 Slack accounts against their email prefix, both will receive a notification
     elif len(get_slack_user_id()) > 1:
         message = (
             f"<@{get_slack_user_id()[0]}> / <@{get_slack_user_id()[1]}> is on support for {get_on_call_schedule_name()}"
