@@ -109,8 +109,8 @@ def main():
     # if a user has 2 Slack accounts against their email prefix, both will receive a notification
     elif len(slack_user_ids) > 1:
         message = (
-            f"""<@{slack_user_ids[0]}> / <@{slack_user_ids()[1]}> is on 
-            support for {get_on_call_schedule_name()}"""
+            f"<@{slack_user_ids[0]}> / <@{slack_user_ids[1]}> is on support for "
+            f"{get_on_call_schedule_name()}"
         )
     else:
         message = (
