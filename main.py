@@ -66,20 +66,31 @@ def get_on_call_user():
 
 def get_slack_user_id():
     """
-    Fetches the Slack user ID of the on-call user based on their email.
+    Fetches the Slack user IDs of the on-call user based on their email variations.
 
     Returns:
-        str: The Slack user ID of the on-call user.
+        list: A list of Slack user IDs for the on-call user.
     """
-    user_id = None
 
-    try:
-        response = slack_client.users_lookupByEmail(email=get_on_call_user()[1])
-        user_id = response["user"]["id"]
-    except SlackApiError:
-        pass
+    digital_suff = "@justice.gov.uk"
+    justice_suff = "@digital.justice.gov.uk"
 
-    return user_id
+    user_ids = []
+    email = get_on_call_user()[1]
+    user_email_pref = email.split('@')[0]
+
+    # gets ids for both digital and justice email addresses.
+    justice_email = user_email_pref + digital_suff
+    digital_email = user_email_pref + justice_suff
+
+    for email_variant in [justice_email, digital_email]:
+        try:
+            response = slack_client.users_lookupByEmail(email=email_variant)
+            user_ids.append(response["user"]["id"])
+        except SlackApiError:
+            pass
+
+    return user_ids
 
 
 def main():
@@ -90,9 +101,15 @@ def main():
         message = (
             f"{get_on_call_user()[0]} is on support for {get_on_call_schedule_name()}"
         )
+    
+    # if a user has 2 Slack accounts against their email prefix, both will receive a notification.
+    elif len(get_slack_user_id()) > 1:
+        message = (
+            f"<@{get_slack_user_id()[0]}> / <@{get_slack_user_id()[1]}> is on support for {get_on_call_schedule_name()}"
+        )
     else:
         message = (
-            f"<@{get_slack_user_id()}> is on support for {get_on_call_schedule_name()}"
+            f"<@{get_slack_user_id()[0]}> is on support for {get_on_call_schedule_name()}"
         )
 
     slack_client.chat_postMessage(
