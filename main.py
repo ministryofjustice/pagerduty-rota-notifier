@@ -12,7 +12,7 @@ from slack_sdk.errors import SlackApiError
 
 date = strftime("%Y-%m-%d")
 
-pagerduty_scedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
+pagerduty_schedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
 pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 
 slack_channel = os.environ["SLACK_CHANNEL"]
@@ -29,7 +29,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_scedule_id)
+    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
     schedule_name = None
 
     if response.ok:
@@ -47,7 +47,7 @@ def get_on_call_user():
     """
     response = pagerduty_client.get(
         "/schedules/"
-        + pagerduty_scedule_id
+        + pagerduty_schedule_id
         + "/users?since="
         + date
         + "T09%3A00Z&until="
@@ -66,33 +66,55 @@ def get_on_call_user():
 
 def get_slack_user_id():
     """
-    Fetches the Slack user ID of the on-call user based on their email.
+    Fetches the Slack user IDs of the on-call user based on their email variations.
 
     Returns:
-        str: The Slack user ID of the on-call user.
+        list: A list of Slack user IDs for the on-call user.
     """
-    user_id = None
+    user_ids = []
 
-    try:
-        response = slack_client.users_lookupByEmail(email=get_on_call_user()[1])
-        user_id = response["user"]["id"]
-    except SlackApiError:
-        pass
+    # get a user's email prefix
+    email = get_on_call_user()[1]
+    user_email_pref = email.split("@")[0]
 
-    return user_id
+    # suffixes for email addresses
+    digital_suff = "@justice.gov.uk"
+    justice_suff = "@digital.justice.gov.uk"
+
+    # create digital and justice email addresses for user
+    justice_email = user_email_pref + digital_suff
+    digital_email = user_email_pref + justice_suff
+
+    for email_variant in [justice_email, digital_email]:
+        try:
+            response = slack_client.users_lookupByEmail(email=email_variant)
+            user_ids.append(response["user"]["id"])
+        except SlackApiError:
+            pass
+
+    return user_ids
 
 
 def main():
     """
     Main function to post a message to the Slack channel about the on-call user.
     """
-    if get_slack_user_id() is None:
+    slack_user_ids = get_slack_user_id()
+
+    if not slack_user_ids:
         message = (
             f"{get_on_call_user()[0]} is on support for {get_on_call_schedule_name()}"
         )
+
+    # if a user has 2 Slack accounts against their email prefix, both will receive a notification
+    elif len(slack_user_ids) > 1:
+        message = (
+            f"<@{slack_user_ids[0]}> / <@{slack_user_ids[1]}> is on support for "
+            f"{get_on_call_schedule_name()}"
+        )
     else:
         message = (
-            f"<@{get_slack_user_id()}> is on support for {get_on_call_schedule_name()}"
+            f"<@{slack_user_ids[0]}> is on support for {get_on_call_schedule_name()}"
         )
 
     slack_client.chat_postMessage(
