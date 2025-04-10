@@ -81,7 +81,7 @@ def get_slack_user_id():
     digital_suff = "@justice.gov.uk"
     justice_suff = "@digital.justice.gov.uk"
 
-    # defines ids for both digital and justice email addresses
+    # create digital and justice email addresses for user
     justice_email = user_email_pref + digital_suff
     digital_email = user_email_pref + justice_suff
 
