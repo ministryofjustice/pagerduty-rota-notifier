@@ -84,7 +84,7 @@ def get_channel_user_details():
                 "id": str,
                 "user_email_pref": str
             }
-          If an error occurs, returns an empty dict.
+        If an error occurs, returns an empty dict.
     """
     try:
         response = slack_client.conversations_members(channel=slack_channel)
@@ -109,7 +109,7 @@ def get_channel_user_details():
                 "name": name,
                 "email": email,
                 "id": user_info["user"]["id"],
-                "user_email_pref": user_email_pref
+                "user_email_pref": user_email_pref,
             }
         except SlackApiError as e:
             print(f"Error fetching user info for user {user_id}: {e.response['error']}")
@@ -123,12 +123,12 @@ def get_slack_user_id():
     """
     Identifies the Slack user ID of the on-call user based on PagerDuty data.
 
-    This function retrieves the on-call user's email from PagerDuty and attempts 
-    to match it with the email addresses of Slack channel members. If an exact 
+    This function retrieves the on-call user's email from PagerDuty and attempts
+    to match it with the email addresses of Slack channel members. If an exact
     match is not found, it tries to match a simplified version of the email prefix.
 
     Returns:
-        str or None: The Slack user ID of the on-call user if a match is found, 
+        str or None: The Slack user ID of the on-call user if a match is found,
         otherwise None.
     """
     # get the on-call user from PagerDuty
@@ -143,7 +143,7 @@ def get_slack_user_id():
 
     # initially try to find a match by the exact email
     for slack_user_id, info in user_details.items():
-        if info["email"].lower() == user_email.lower():
+        if info["email"] == user_email.lower():
             return slack_user_id
 
     # if no exact email match, then try matching the simplified email prefix
@@ -153,6 +153,7 @@ def get_slack_user_id():
                 return slack_user_id
 
     return None
+
 
 def main():
     """
@@ -175,5 +176,6 @@ def main():
         channel=slack_channel,
         text=message,
     )
+
 
 main()
