@@ -86,6 +86,7 @@ def get_channel_user_details():
             }
         If an error occurs, returns an empty dict.
     """
+    # get the list of members in a Slack channel
     try:
         response = slack_client.conversations_members(channel=slack_channel)
         member_ids = response["members"]
@@ -93,6 +94,7 @@ def get_channel_user_details():
         print(f"Error fetching members: {e.response['error']}")
         return {}
 
+    # iterate over the members and get their details
     members_info = {}
     for user_id in member_ids:
         try:
