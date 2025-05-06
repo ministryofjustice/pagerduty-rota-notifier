@@ -12,7 +12,7 @@ from slack_sdk.errors import SlackApiError
 
 date = strftime("%Y-%m-%d")
 
-pagerduty_scedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
+pagerduty_schedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
 pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 
 slack_channel = os.environ["SLACK_CHANNEL"]
@@ -29,7 +29,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_scedule_id)
+    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
     schedule_name = None
 
     if response.ok:
@@ -47,7 +47,7 @@ def get_on_call_user():
     """
     response = pagerduty_client.get(
         "/schedules/"
-        + pagerduty_scedule_id
+        + pagerduty_schedule_id
         + "/users?since="
         + date
         + "T09%3A00Z&until="
