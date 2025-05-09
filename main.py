@@ -12,7 +12,7 @@ from slack_sdk.errors import SlackApiError
 
 date = strftime("%Y-%m-%d")
 
-pagerduty_scedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
+pagerduty_schedule_id = os.environ["PAGERDUTY_SCHEDULE_ID"]
 pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 
 slack_channel = os.environ["SLACK_CHANNEL"]
@@ -29,7 +29,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_scedule_id)
+    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
     schedule_name = None
 
     if response.ok:
@@ -47,7 +47,7 @@ def get_on_call_user():
     """
     response = pagerduty_client.get(
         "/schedules/"
-        + pagerduty_scedule_id
+        + pagerduty_schedule_id
         + "/users?since="
         + date
         + "T09%3A00Z&until="
@@ -58,8 +58,26 @@ def get_on_call_user():
     user_email = None
 
     if response.ok:
-        user_name = response.json()["users"][0]["name"]
-        user_email = response.json()["users"][0]["email"]
+        user = response.json()["users"][0]
+        user_name = user["name"]
+        user_id = user["id"]
+
+        # Pull the user again, this time with contact methods included
+        user_detail_response = pagerduty_client.get(
+            f"/users/{user_id}?include[]=contact_methods"
+        )
+
+        if user_detail_response.ok:
+            # Look for the e‑mail address whose contact‑method label is “Default”
+            for cm in user_detail_response.json()["user"].get("contact_methods", []):
+                if cm.get("label") == "Default":
+                    # “address” holds the e‑mail value
+                    user_email = cm.get("address")
+                    break
+
+        # If no “Default” label was found, fall back to the user’s primary e‑mail
+        if user_email is None:
+            user_email = user.get("email")
 
     return user_name, user_email
 
