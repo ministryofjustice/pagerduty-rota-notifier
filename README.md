@@ -19,6 +19,7 @@ To use this for your team's PagerDuty rota:
 1. Invite `@PagerDuty Rota` to your Slack channel
 
 ## Configure Slack notifications to correct user
+
 If a user's Slack and PagerDuty email address don't match each other (usually occurs when a user's Slack account is linked to their Justice email and their PagerDuty account to their Digital email), the Slack notifications will not work correctly. To resolve this you need to ensure your Default PagerDuty email matches your Slack account email by doing the following:
 
 1. Log into your PagerDuty account [here](https://moj-digital-tools.pagerduty.com/incidents).
