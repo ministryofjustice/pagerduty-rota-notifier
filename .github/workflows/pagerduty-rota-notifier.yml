@@ -27,6 +27,10 @@ jobs:
             slack-channel: CBVUV2613 # data-and-analytics-engineering
           - pagerduty-schedule-id: PAMEXM1 # Data Engineering Support G7
             slack-channel: CBVUV2613 # data-and-analytics-engineering
+          - pagerduty-schedule-id: PEZPWMA # Analytics Engineering Support SEO_HEO
+            slack-channel: C091ZJEFNL9 # ae-rota-test
+          - pagerduty-schedule-id: PHEKY21 # Analytics Engineering Support G7
+            slack-channel: C091ZJEFNL9 # ae-rota-test
     steps:
       - name: Checkout
         id: checkout
