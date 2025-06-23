@@ -29,7 +29,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
+    response = pagerduty_client.get(f"/schedules/{pagerduty_schedule_id}")
     schedule_name = None
 
     if response.ok:
@@ -46,13 +46,7 @@ def get_on_call_user():
         tuple: A tuple containing the name and email of the on-call user.
     """
     response = pagerduty_client.get(
-        "/schedules/"
-        + pagerduty_schedule_id
-        + "/users?since="
-        + date
-        + "T09%3A00Z&until="
-        + date
-        + "T17%3A00Z"
+        f"/schedules/{pagerduty_schedule_id}/users?since={date}T09%3A00Z&until={date}T17%3A00Z"
     )
     user_name = None
     user_email = None
