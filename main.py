@@ -5,6 +5,7 @@ fetch on-call schedules and notify the relevant Slack channel.
 
 import os
 from time import strftime
+from urllib.parse import urlencode
 
 from pagerduty import RestApiV2Client
 from slack_sdk import WebClient
@@ -45,8 +46,10 @@ def get_on_call_user():
     Returns:
         tuple: A tuple containing the name and email of the on-call user.
     """
+    params = {"since": f"{date}T09:00Z", "until": f"{date}T17:00Z"}
+    query_string = urlencode(params)
     response = pagerduty_client.get(
-        f"/schedules/{pagerduty_schedule_id}/users?since={date}T09%3A00Z&until={date}T17%3A00Z"
+        f"/schedules/{pagerduty_schedule_id}/users?{query_string}"
     )
     user_name = None
     user_email = None
