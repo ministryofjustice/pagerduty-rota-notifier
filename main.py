@@ -6,7 +6,7 @@ fetch on-call schedules and notify the relevant Slack channel.
 import os
 from time import strftime
 
-from pdpyras import APISession
+from pagerduty import RestApiV2Client
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
@@ -18,7 +18,7 @@ pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 slack_channel = os.environ["SLACK_CHANNEL"]
 slack_token = os.environ["SLACK_TOKEN"]
 
-pagerduty_client = APISession(pagerduty_token)
+pagerduty_client = RestApiV2Client(pagerduty_token)
 slack_client = WebClient(token=slack_token)
 
 
@@ -113,4 +113,5 @@ def main():
     )
 
 
-main()
+if __name__ == "__main__":
+    main()
