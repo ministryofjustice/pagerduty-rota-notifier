@@ -5,8 +5,9 @@ fetch on-call schedules and notify the relevant Slack channel.
 
 import os
 from time import strftime
+from urllib.parse import urlencode
 
-from pdpyras import APISession
+from pagerduty import RestApiV2Client
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
@@ -18,7 +19,7 @@ pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 slack_channel = os.environ["SLACK_CHANNEL"]
 slack_token = os.environ["SLACK_TOKEN"]
 
-pagerduty_client = APISession(pagerduty_token)
+pagerduty_client = RestApiV2Client(pagerduty_token)
 slack_client = WebClient(token=slack_token)
 
 
@@ -29,7 +30,7 @@ def get_on_call_schedule_name():
     Returns:
         str: The name of the on-call schedule.
     """
-    response = pagerduty_client.get("/schedules/" + pagerduty_schedule_id)
+    response = pagerduty_client.get(f"/schedules/{pagerduty_schedule_id}")
     schedule_name = None
 
     if response.ok:
@@ -45,14 +46,10 @@ def get_on_call_user():
     Returns:
         tuple: A tuple containing the name and email of the on-call user.
     """
+    params = {"since": f"{date}T09:00Z", "until": f"{date}T17:00Z"}
+    query_string = urlencode(params)
     response = pagerduty_client.get(
-        "/schedules/"
-        + pagerduty_schedule_id
-        + "/users?since="
-        + date
-        + "T09%3A00Z&until="
-        + date
-        + "T17%3A00Z"
+        f"/schedules/{pagerduty_schedule_id}/users?{query_string}"
     )
     user_name = None
     user_email = None
@@ -119,4 +116,5 @@ def main():
     )
 
 
-main()
+if __name__ == "__main__":
+    main()

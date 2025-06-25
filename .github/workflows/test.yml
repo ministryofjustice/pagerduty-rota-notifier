@@ -1,5 +1,6 @@
 ---
-name: 🦝 Super Linter
+name: 🧪 Test
+
 on:
   pull_request:
     branches:
@@ -8,12 +9,11 @@ on:
 permissions: {}
 
 jobs:
-  super-linter:
-    name: Super Linter
+  test:
+    name: Test
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      statuses: write
     steps:
       - name: Harden Runner
         id: harden_runner
@@ -26,12 +26,17 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
-          fetch-depth: 0
 
-      - name: Super Linter
-        id: super_linter
-        uses: super-linter/super-linter/slim@12150456a73e248bdc94d0794898f94e23127c88 # v7.4.0
+      - name: Set Up UV
+        id: setup_uv
+        uses: astral-sh/setup-uv@445689ea25e0de0a23313031f5fe577c74ae45a1 # v6.3.0
+
+      - name: Run Tests
+        id: run_tests
+        run: |
+          uv run pytest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MULTI_STATUS: false
-          VALIDATE_JSCPD: false
+          PAGERDUTY_SCHEDULE_ID: "test"
+          PAGERDUTY_TOKEN: "test"
+          SLACK_CHANNEL: "test"
+          SLACK_TOKEN: "test"
