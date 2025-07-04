@@ -34,8 +34,9 @@ jobs:
       - name: Run Tests
         id: run_tests
         run: |
-          uv run pytest
+          uv run pytest test
         env:
+          PYTHONPATH: "."
           PAGERDUTY_SCHEDULE_ID: "test"
           PAGERDUTY_TOKEN: "test"
           SLACK_CHANNEL: "test"
