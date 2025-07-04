@@ -1,0 +1,17 @@
+.PHONY: test
+
+PYTHONPATH="."
+
+PAGERDUTY_SCHEDULE_ID ?= "dummy"
+PAGERDUTY_TOKEN       ?= "dummy"
+SLACK_CHANNEL	   	  ?= "dummy"
+SLACK_TOKEN	          ?= "dummy"
+
+test:
+	@echo "Running pytest"
+	PYTHONPATH=$(PYTHONPATH) \
+	PAGERDUTY_SCHEDULE_ID=$(PAGERDUTY_SCHEDULE_ID) \
+	PAGERDUTY_TOKEN=$(PAGERDUTY_TOKEN) \
+	SLACK_CHANNEL=$(SLACK_CHANNEL) \
+	SLACK_TOKEN=$(SLACK_TOKEN) \
+	uv run pytest test
