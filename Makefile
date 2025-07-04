@@ -2,10 +2,10 @@
 
 PYTHONPATH="."
 
-PAGERDUTY_SCHEDULE_ID ?= "dummy"
-PAGERDUTY_TOKEN       ?= "dummy"
-SLACK_CHANNEL         ?= "dummy"
-SLACK_TOKEN           ?= "dummy"
+PAGERDUTY_SCHEDULE_ID ?= dummy
+PAGERDUTY_TOKEN       ?= dummy
+SLACK_CHANNEL         ?= dummy
+SLACK_TOKEN           ?= dummy
 
 test:
 	@echo "Running pytest"
