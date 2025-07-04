@@ -33,10 +33,4 @@ jobs:
 
       - name: Run Tests
         id: run_tests
-        run: |
-          uv run pytest
-        env:
-          PAGERDUTY_SCHEDULE_ID: "test"
-          PAGERDUTY_TOKEN: "test"
-          SLACK_CHANNEL: "test"
-          SLACK_TOKEN: "test"
+        run: make test
