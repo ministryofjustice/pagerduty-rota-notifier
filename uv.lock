@@ -116,16 +116,16 @@ wheels = [
 
 [[package]]
 name = "pagerduty"
-version = "2.3.0"
+version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
     { name = "requests" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8e/c0/62c2f54b3b8726b867885e46538726c3af24000fdb6a73b9f61c8dcc8614/pagerduty-2.3.0.tar.gz", hash = "sha256:63752ddda9b00cb91f7020b768104266b11fc3011be52ebbb8a8c40fa8ef92ae", size = 32023, upload-time = "2025-06-25T00:11:11.739Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/91/bc/18e6a714ed389a013b2b501367e549d703412a0de5548ae0bdda539193e7/pagerduty-3.0.0.tar.gz", hash = "sha256:61269fb9c2de246abe4c2a00342bf993d0f944b957bcdb23018a12d1017e35c0", size = 36348, upload-time = "2025-07-08T17:38:11.788Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/fa/6a867be034b0d8cfc08bf3e1c1542ba12842e520cceb7a012f83aaddf0f1/pagerduty-2.3.0-py3-none-any.whl", hash = "sha256:bca8e6cbbaec13fd758f42bd9aa29708832f021b46df77af00def80a24dde21b", size = 33829, upload-time = "2025-06-25T00:11:10.588Z" },
+    { url = "https://files.pythonhosted.org/packages/57/78/abd259f6f2b280ad76fd7537f1b5e831a592492b692d0aaa4e4fda8c55c4/pagerduty-3.0.0-py3-none-any.whl", hash = "sha256:162e6bea57f448571de4ea0c574437488f385bd4c932ea821021ecced1655ea8", size = 38539, upload-time = "2025-07-08T17:38:10.925Z" },
 ]
 
 [[package]]
@@ -147,7 +147,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pagerduty", specifier = "==2.3.0" },
+    { name = "pagerduty", specifier = "==3.0.0" },
     { name = "slack-sdk", specifier = "==3.36.0" },
 ]
 
