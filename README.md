@@ -38,7 +38,7 @@ If a user's Slack and PagerDuty email address don't match each other (usually oc
 
 At the time of writing (17/07/2025), Dependabot doesn't support `pre-commit`
 
-- https://github.com/dependabot/dependabot-core/issues/1524
+- <https://github.com/dependabot/dependabot-core/issues/1524>
 
 For now, you can run `pre-commit autoupdate`, for example:
 
@@ -54,9 +54,9 @@ $ pre-commit autoupdate
 
 At the time of writing (17/07/2025), Dependabot doesn't support `dependency-groups` in `pyproject.toml` ([PEP 735](https://peps.python.org/pep-0735/)). However, it's actively being worked on:
 
-- https://github.com/dependabot/dependabot-core/issues/10847
+- <https://github.com/dependabot/dependabot-core/issues/10847>
 
-- https://github.com/dependabot/dependabot-core/pull/12580
+- <https://github.com/dependabot/dependabot-core/pull/12580>
 
 For now, you can run `uv tree --outdated --depth 1 --only-dev` to show top level `dev` dependencies that are out of date, for example:
 
