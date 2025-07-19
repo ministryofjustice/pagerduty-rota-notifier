@@ -1,5 +1,6 @@
 ---
 name: 🦝 Super Linter
+
 on:
   pull_request:
     branches:
@@ -10,28 +11,8 @@ permissions: {}
 jobs:
   super-linter:
     name: Super Linter
-    runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: read
       statuses: write
-    steps:
-      - name: Harden Runner
-        id: harden_runner
-        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
-        with:
-          egress-policy: audit
-
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-
-      - name: Super Linter
-        id: super_linter
-        uses: super-linter/super-linter/slim@12150456a73e248bdc94d0794898f94e23127c88 # v7.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MULTI_STATUS: false
-          VALIDATE_JSCPD: false
+    uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-super-linter.yml@e0b96059804cbe750acb4a495ec6106617972f0b # v4.1.0
