@@ -23,18 +23,10 @@ test:
 
 container-build:
 	@echo "Building container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)"
-	@ARCH=`uname --machine`; \
-	case $$ARCH in \
-	aarch64 | arm64) \
-		echo "Building on $$ARCH architecture"; \
-		docker build --platform linux/amd64 --file Dockerfile --tag $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) . ;; \
-	*) \
-		echo "Building on $$ARCH architecture"; \
-		docker build --file Dockerfile --tag $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) . ;; \
-	esac
+	docker build --platform linux/amd64 --file Dockerfile --tag $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) .
 
 container-test: container-build
-	@echo "Running container structure tests"
+	@echo "Testing container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)"
 	container-structure-test test --platform linux/amd64 --config test/container-structure-test.yml --image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
 
 container-scan: container-test
