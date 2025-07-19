@@ -6,9 +6,9 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:66fc613d6880444f8593aa0a15871
 
 ##################################################
 # Stage: builder
-# From: docker.io/python:3.13-alpine3.21
+# From: docker.io/python:3.13-alpine3.22
 ##################################################
-FROM docker.io/python:3.13-alpine3.21@sha256:763eee4b5cf4dfcfbf76a5a5f8177317ac531c635b855cdc5a95e17fe1e4a44d AS builder
+FROM docker.io/python:3.13-alpine3.22@sha256:37b14db89f587f9eaa890e4a442a3fe55db452b69cca1403cc730bd0fbdc8aaf AS builder
 
 WORKDIR /app
 
@@ -23,11 +23,11 @@ EOF
 
 ##################################################
 # Stage: final
-# From: docker.io/python:3.13-alpine3.21
+# From: docker.io/python:3.13-alpine3.22
 ##################################################
 #checkov:skip=CKV_DOCKER_2: HEALTHCHECK not required
 
-FROM docker.io/python:3.13-alpine3.21@sha256:763eee4b5cf4dfcfbf76a5a5f8177317ac531c635b855cdc5a95e17fe1e4a44d AS final
+FROM docker.io/python:3.13-alpine3.22@sha256:37b14db89f587f9eaa890e4a442a3fe55db452b69cca1403cc730bd0fbdc8aaf AS final
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="GitHub Community <github-community@digital.justice.gov.uk>" \
