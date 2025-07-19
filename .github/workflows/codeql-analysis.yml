@@ -18,3 +18,5 @@ jobs:
       contents: read
       security-events: write
     uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-codeql-analysis.yml@e0b96059804cbe750acb4a495ec6106617972f0b # v4.1.0
+    with:
+      languages: '["actions", "python"]'
