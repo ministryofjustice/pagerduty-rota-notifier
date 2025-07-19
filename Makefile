@@ -1,4 +1,4 @@
-.PHONY: test container-build container-test container-scan
+.PHONY: test container-build container-test container-scan container-run
 
 PYTHONPATH := .
 
@@ -9,6 +9,7 @@ SLACK_TOKEN           ?= dummy
 
 CONTAINER_IMAGE_NAME     ?= ghcr.io/ministryofjustice/pagerduty-rota-notifier
 CONTAINER_IMAGE_TAG      ?= local
+CONTAINER_NAME           ?= pagerduty-rota-notifier
 
 test:
 	@echo "Running pytest"
@@ -29,4 +30,13 @@ container-test: container-build
 
 container-scan: container-test
 	@echo "Scanning container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) for vulnerabilities"
-	trivy image --db-repository --platform linux/amd64 --severity HIGH,CRITICAL $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
+	trivy image --platform linux/amd64 --severity HIGH,CRITICAL $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
+
+container-run: container-test
+	@echo "Running container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)"
+	docker run --rm --platform linux/amd64 --name $(CONTAINER_NAME) \
+		--env PAGERDUTY_SCHEDULE_ID=$(PAGERDUTY_SCHEDULE_ID) \
+		--env PAGERDUTY_TOKEN=$(PAGERDUTY_TOKEN) \
+		--env SLACK_CHANNEL=$(SLACK_CHANNEL) \
+		--env SLACK_TOKEN=$(SLACK_TOKEN) \
+		$(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
