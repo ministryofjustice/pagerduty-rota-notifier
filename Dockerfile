@@ -10,6 +10,9 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:66fc613d6880444f8593aa0a15871
 ##################################################
 FROM docker.io/python:3.13-alpine3.22@sha256:37b14db89f587f9eaa890e4a442a3fe55db452b69cca1403cc730bd0fbdc8aaf AS builder
 
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE="copy"
+
 WORKDIR /app
 
 COPY --from=uv /usr/local/bin/uv /usr/local/bin/uv
