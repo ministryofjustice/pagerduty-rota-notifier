@@ -58,5 +58,4 @@ COPY --chown=${CONTAINER_UID}:${CONTAINER_GID} main.py /app
 
 USER ${CONTAINER_UID}
 
-EXPOSE 8080
 ENTRYPOINT ["python", "main.py"]
