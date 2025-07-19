@@ -9,8 +9,6 @@ SLACK_TOKEN           ?= dummy
 
 CONTAINER_IMAGE_NAME     ?= ghcr.io/ministryofjustice/pagerduty-rota-notifier
 CONTAINER_IMAGE_TAG      ?= local
-TRIVY_DB_REPOSITORY      ?= public.ecr.aws/aquasecurity/trivy-db:2
-TRIVY_JAVA_DB_REPOSITORY ?= public.ecr.aws/aquasecurity/trivy-java-db:1
 
 test:
 	@echo "Running pytest"
@@ -31,4 +29,4 @@ container-test: container-build
 
 container-scan: container-test
 	@echo "Scanning container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) for vulnerabilities"
-	trivy image --platform linux/amd64 --severity HIGH,CRITICAL $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
+	trivy image --db-repository --platform linux/amd64 --severity HIGH,CRITICAL $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
