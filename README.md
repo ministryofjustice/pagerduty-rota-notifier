@@ -6,29 +6,29 @@
 
 [![Open in Codespace](https://github.com/codespaces/badge.svg)](https://codespaces.new/ministryofjustice/pagerduty-rota-notifier)
 
-This repository contains the code and a scheduled GitHub Actions workflow for sending a notification to a Slack channel
+This repository contains the code and scheduled GitHub Actions workflow for sending a notification to a Slack channel.
 
-![Example message from Slack](/contrib/example-slack-message.png)
+![Example Slack message](/contrib/example-slack-message.png)
 
 ## Using
 
 To use this for your team's PagerDuty rota:
 
-1. Add your PagerDuty rota ID and Slack channel to the matrix in [`.github/workflows/pagerduty-rota-notifier.yml`](.github/workflows/pagerduty-rota-notifier.yml)
+1. Add your PagerDuty rota ID and Slack channel ID to the matrix in [`.github/workflows/pagerduty-rota-notifier.yml`](.github/workflows/pagerduty-rota-notifier.yml)
 
 1. Invite `@PagerDuty Rota` to your Slack channel
 
-## Configure Slack notifications to correct user
+### Configure Slack notifications for the correct user
 
-If a user's Slack and PagerDuty email address don't match each other (usually occurs when a user's Slack account is linked to their Justice email and their PagerDuty account to their Digital email), the Slack notifications will not work correctly. To resolve this you need to ensure your Default PagerDuty email matches your Slack account email by doing the following:
+Slack notifications will not function correctly if a user's Slack and PagerDuty email addresses do not match. This typically occurs when a user links their Slack account to their Justice email and their PagerDuty account to their Justice Digital email. To resolve this, ensure your Default PagerDuty email matches your Slack account email by taking the following steps:
 
-1. Log into your PagerDuty account [here](https://moj-digital-tools.pagerduty.com/incidents).
+1. [Log in to your PagerDuty account](https://moj-digital-tools.pagerduty.com/).
 
-2. Click 'My Profile' in the top-right-hand corner.
+2. Click 'My Profile' in the top right corner.
 
-3. Under 'Contact Information', update your Default email address to match your Slack account email address and click Save.
+3. Under 'Contact Information', update your 'Default' email address to match your Slack account email address and click 'Save'.
 
-4. Future PagerDuty notifications should now correctly tag your correct account in Slack.
+Future PagerDuty notifications should now correctly tag your account in Slack.
 
 ## Development
 
