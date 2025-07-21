@@ -2,7 +2,10 @@
   "name": "pagerduty-rota-notifier",
   "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
   "features": {
-    "ghcr.io/ministryofjustice/devcontainer-feature/astral:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/astral:1": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/container-structure-test:1": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/static-analysis:1": {}
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "customizations": {
