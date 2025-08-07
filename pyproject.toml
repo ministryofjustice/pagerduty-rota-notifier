@@ -1,6 +1,6 @@
 [project]
 name = "pagerduty-rota-notifier"
-version = "0.1.0"
+version = "1.0.1"
 description = "PagerDuty Rota Notifier"
 readme = "README.md"
 requires-python = ">=3.13"
