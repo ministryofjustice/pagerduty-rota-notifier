@@ -20,7 +20,7 @@ repos:
       - id: zizmor
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 4cbc74d53fe5634e58e0e65db7d28939c9cec3f7  # frozen: v0.12.7
+    rev: 455f64b32459518aa82ec33b63f799ed048d65a9  # frozen: v0.12.8
     hooks:
       - id: ruff-check
         args: [--fix]
