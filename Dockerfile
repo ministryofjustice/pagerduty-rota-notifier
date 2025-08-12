@@ -2,7 +2,7 @@
 # Stage: uv
 # From: ghcr.io/astral-sh/uv:python3.13-alpine
 ##################################################
-FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:30b0d0f67eb7a5f79325709fff1bb0a93c991674b0caf04ef4017e7ee5b44be4 AS uv
+FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:430fa1935c4da7b619e7d008acbe3346db1ed26c7e5020e23aa3c9dcad58407c AS uv
 
 ##################################################
 # Stage: builder
