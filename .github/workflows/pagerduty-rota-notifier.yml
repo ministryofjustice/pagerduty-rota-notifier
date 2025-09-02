@@ -31,8 +31,8 @@ jobs:
             slack-channel: C091ZJEFNL9 # ae-rota-test
           - pagerduty-schedule-id: PHEKY21 # Analytics Engineering Support G7
             slack-channel: C091ZJEFNL9 # ae-rota-test
-          - pagerduty-schedule-id: P3MCA8L
-            slack-channel: C069RF589V4
+          - pagerduty-schedule-id: P3MCA8L # em-data-hub-rpta
+            slack-channel: C069RF589V4 # em-engineers-moj-madetech
     steps:
       - name: Harden Runner
         id: harden_runner
