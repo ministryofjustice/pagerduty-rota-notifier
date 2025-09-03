@@ -31,6 +31,8 @@ jobs:
             slack-channel: C091ZJEFNL9 # ae-rota-test
           - pagerduty-schedule-id: PHEKY21 # Analytics Engineering Support G7
             slack-channel: C091ZJEFNL9 # ae-rota-test
+          - pagerduty-schedule-id: P3MCA8L # em-data-hub-rpta
+            slack-channel: C069RF589V4 # em-engineers-moj-madetech
     steps:
       - name: Harden Runner
         id: harden_runner
@@ -46,7 +48,7 @@ jobs:
 
       - name: Set Up uv
         id: setup_uv
-        uses: astral-sh/setup-uv@4959332f0f014c5280e7eac8b70c90cb574c9f9b # v6.6.0
+        uses: astral-sh/setup-uv@557e51de59eb14aaaba2ed9621916900a91d50c6 # v6.6.1
 
       - name: Run Script
         id: run_script
