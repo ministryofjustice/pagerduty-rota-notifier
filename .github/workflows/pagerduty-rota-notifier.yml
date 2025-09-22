@@ -33,7 +33,9 @@ jobs:
             slack-channel: C091ZJEFNL9 # ae-rota-test
           - pagerduty-schedule-id: P3MCA8L # em-data-hub-rpta
             slack-channel: C069RF589V4 # em-engineers-moj-madetech
-          - pagerduty-schedule-id: PF2LL87 # Infrastructure Automation Team Support Test
+          - pagerduty-schedule-id: PF2LL87 # Infrastructure Automation Team Support In Hours Test
+            slack-channel: C09FJNE3WD6 # iat-test
+          - pagerduty-schedule-id: PDD6OL6 # Infrastructure Automation Team Support OOH Test
             slack-channel: C09FJNE3WD6 # iat-test
     steps:
       - name: Harden Runner
