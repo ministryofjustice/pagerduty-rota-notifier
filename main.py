@@ -19,8 +19,6 @@ pagerduty_token = os.environ["PAGERDUTY_TOKEN"]
 slack_channel = os.environ["SLACK_CHANNEL"]
 slack_token = os.environ["SLACK_TOKEN"]
 
-pagerduty_schedule_start_time = os.environ.get("PAGERDUTY_SCHEDULE_START_TIME", "09:00")
-
 pagerduty_client = RestApiV2Client(pagerduty_token)
 slack_client = WebClient(token=slack_token)
 
@@ -48,9 +46,7 @@ def get_on_call_user():
     Returns:
         tuple: A tuple containing the name and email of the on-call user.
     """
-    params = {
-        "since": f"{date}T{pagerduty_schedule_start_time}Z",
-    }
+    params = {"since": f"{date}T09:00Z", "until": f"{date}T17:00Z"}
     query_string = urlencode(params)
     response = pagerduty_client.get(
         f"/schedules/{pagerduty_schedule_id}/users?{query_string}"
