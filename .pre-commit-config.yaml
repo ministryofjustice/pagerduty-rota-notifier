@@ -15,12 +15,12 @@ repos:
       - id: gitleaks
 
   - repo: https://github.com/zizmorcore/zizmor-pre-commit
-    rev: b933184438555436e38621f46ceb0c417cbed400  # frozen: v1.13.0
+    rev: 122d24ec728f140b38330ae8b04e3c5fe8b774c5  # frozen: v1.15.2
     hooks:
       - id: zizmor
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: f298305809c552671cc47e0fec0ba43e96c146a2  # frozen: v0.13.2
+    rev: 3b4bc031619cde2e0a9f3c4441ac7cc8227245a4  # frozen: v0.14.1
     hooks:
       - id: ruff-check
         args: [--fix]
