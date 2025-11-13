@@ -12,7 +12,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pre-commit==4.4.0",
-    "pytest==9.0.0",
+    "pytest==9.0.1",
     "ruff==0.14.4",
     "zizmor==1.16.3",
 ]
