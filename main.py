@@ -33,7 +33,9 @@ def get_on_call_schedule_name():
     response = pagerduty_client.get(f"/schedules/{pagerduty_schedule_id}")
     schedule_name = None
 
-    if response.ok:
+    # use getattr to check which attributes are returned in the response.
+    # is_success works with newer httpx style.
+    if getattr(response, "ok", None) or getattr(response, "is_success", None):
         schedule_name = response.json()["schedule"]["name"]
 
     return schedule_name
@@ -54,7 +56,9 @@ def get_on_call_user():
     user_name = None
     user_email = None
 
-    if response.ok:
+    # use getattr to check which attributes are returned in the response.
+    # is_success works with newer httpx style.
+    if getattr(response, "ok", None) or getattr(response, "is_success", None):
         user = response.json()["users"][0]
         user_name = user["name"]
         user_id = user["id"]
@@ -64,7 +68,11 @@ def get_on_call_user():
             f"/users/{user_id}?include[]=contact_methods"
         )
 
-        if user_detail_response.ok:
+        # use getattr to check which attributes are returned in the response.
+        # is_success works with newer httpx style.
+        if getattr(user_detail_response, "ok", None) or getattr(
+            user_detail_response, "is_success", None
+        ):
             # Look for the e‑mail address whose contact‑method label is “Default”
             for cm in user_detail_response.json()["user"].get("contact_methods", []):
                 if cm.get("label") == "Default":
