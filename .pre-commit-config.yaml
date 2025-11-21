@@ -10,7 +10,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: 3683f1700eef4d855cd549ccbbde4cd0f9e55321  # frozen: v8.29.0
+    rev: 4b720c2674b640d046dadf45c2bc5173ee3734a4  # frozen: v8.29.1
     hooks:
       - id: gitleaks
 
@@ -20,7 +20,7 @@ repos:
       - id: zizmor
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 740a8f85dd054f284b506c33d50b4b1f0d7d20d1  # frozen: v0.14.4
+    rev: 488940d9de1b658fac229e34c521d75a6ea476f2  # frozen: v0.14.5
     hooks:
       - id: ruff-check
         args: [--fix]
