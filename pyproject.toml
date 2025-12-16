@@ -5,7 +5,7 @@ description = "PagerDuty Rota Notifier"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "pagerduty==6.0.0",
+    "pagerduty==6.1.0",
     "slack-sdk==3.37.0",
 ]
 
