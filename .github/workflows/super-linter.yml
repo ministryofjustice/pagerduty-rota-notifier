@@ -19,12 +19,6 @@ jobs:
     with:
       super-linter-variables: |
         {
-          "PYTHON_RUFF_CONFIG_FILE": "/github/workspace/pyproject.toml",
-          "PYTHON_RUFF_FORMAT_CONFIG_FILE": "/github/workspace/pyproject.toml",
-          "VALIDATE_JUPYTER_NBQA_BLACK": false,
-          "VALIDATE_JUPYTER_NBQA_FLAKE8": false,
-          "VALIDATE_JUPYTER_NBQA_ISORT": false,
-          "VALIDATE_JUPYTER_NBQA_MYPY": false,
-          "VALIDATE_JUPYTER_NBQA_PYLINT": false,
-          "VALIDATE_JUPYTER_NBQA_RUFF": false
+          "LINTER_RULES_PATH": ".",
+          "PYTHON_RUFF_FORMAT_CONFIG_FILE": "pyproject.toml",
         }
