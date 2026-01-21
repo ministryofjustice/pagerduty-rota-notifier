@@ -16,3 +16,9 @@ jobs:
       packages: read
       statuses: write
     uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-super-linter.yml@2ab174150aeb0a6003afd1c0b4316698720b3b6b # v5.5.0
+    with:
+      super-linter-variables: |
+        {
+          "PYTHON_RUFF_CONFIG_FILE": "pyproject.toml",
+          "PYTHON_RUFF_FORMAT_CONFIG_FILE": "pyproject.toml"
+        }
