@@ -20,5 +20,5 @@ jobs:
       super-linter-variables: |
         {
           "LINTER_RULES_PATH": ".",
-          "PYTHON_RUFF_FORMAT_CONFIG_FILE": "pyproject.toml",
+          "PYTHON_RUFF_FORMAT_CONFIG_FILE": "pyproject.toml"
         }
