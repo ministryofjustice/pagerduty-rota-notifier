@@ -3,9 +3,7 @@
   "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:": {},
-    "ghcr.io/ministryofjustice/devcontainer-feature/astral:1": {},
-    "ghcr.io/ministryofjustice/devcontainer-feature/container-structure-test:1": {},
-    "ghcr.io/ministryofjustice/devcontainer-feature/static-analysis:1": {}
+    "ghcr.io/ministryofjustice/devcontainer-feature/astral:": {}
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "customizations": {
@@ -13,6 +11,8 @@
       "extensions": [
         "charliermarsh.ruff",
         "EditorConfig.EditorConfig",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
         "GitHub.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
         "ms-python.python"
