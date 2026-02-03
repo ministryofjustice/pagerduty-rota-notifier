@@ -6,9 +6,9 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:77ea271de1d3b0a7f2cfbfd5d127a
 
 ##################################################
 # Stage: builder
-# From: docker.io/python:3.13-alpine3.22
+# From: docker.io/python:3.14-alpine3.22
 ##################################################
-FROM docker.io/python:3.14-alpine3.22@sha256:91859223a313a4407c239afb3a8e68bddc3dbfb0d24ddc5bdeb029136b55b150 AS builder
+FROM docker.io/python:3.14-alpine3.22@sha256:0c9c03e6c7909bf02b4cc69f985a58e6551d68aa2af858a19dc19da385aa7965 AS builder
 
 ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE="copy"
@@ -26,11 +26,11 @@ EOF
 
 ##################################################
 # Stage: final
-# From: docker.io/python:3.13-alpine3.22
+# From: docker.io/python:3.14-alpine3.22
 ##################################################
 #checkov:skip=CKV_DOCKER_2: HEALTHCHECK not required for one-time execution container running a Python script
 
-FROM docker.io/python:3.14-alpine3.22@sha256:91859223a313a4407c239afb3a8e68bddc3dbfb0d24ddc5bdeb029136b55b150 AS final
+FROM docker.io/python:3.14-alpine3.22@sha256:0c9c03e6c7909bf02b4cc69f985a58e6551d68aa2af858a19dc19da385aa7965 AS final
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Analytical Platform <analytical-platform@justice.gov.uk>" \
