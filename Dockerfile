@@ -6,7 +6,7 @@ FROM ghcr.io/astral-sh/uv:python3.13-alpine@sha256:77ea271de1d3b0a7f2cfbfd5d127a
 
 ##################################################
 # Stage: builder
-# From: docker.io/python:3.13-alpine3.22
+# From: docker.io/python:3.14-alpine3.22
 ##################################################
 FROM docker.io/python:3.14-alpine3.22@sha256:0c9c03e6c7909bf02b4cc69f985a58e6551d68aa2af858a19dc19da385aa7965 AS builder
 
@@ -26,7 +26,7 @@ EOF
 
 ##################################################
 # Stage: final
-# From: docker.io/python:3.13-alpine3.22
+# From: docker.io/python:3.14-alpine3.22
 ##################################################
 #checkov:skip=CKV_DOCKER_2: HEALTHCHECK not required for one-time execution container running a Python script
 
