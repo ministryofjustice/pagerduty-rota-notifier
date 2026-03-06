@@ -13,7 +13,7 @@ dependencies = [
 dev = [
     "pre-commit==4.5.1",
     "pytest==9.0.2",
-    "ruff==0.14.14",
+    "ruff==0.15.4",
     "zizmor==1.22.0",
 ]
 
