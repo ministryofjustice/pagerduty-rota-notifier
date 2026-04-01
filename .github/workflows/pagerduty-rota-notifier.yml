@@ -3,7 +3,7 @@ name: 📟 PagerDuty Rota Notifier
 
 on:
   schedule:
-    - cron: "0 9 * * 1-5"
+    - cron: "0 8 * * 1-5"
       timezone: "Europe/London"
   workflow_dispatch:
 
