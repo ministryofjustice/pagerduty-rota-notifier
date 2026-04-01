@@ -14,4 +14,4 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-pre-commit-update.yml@f560940f48f870d54b3ce6a318d3548132c5da96 # v6.0.0
+    uses: ministryofjustice/analytical-platform-github-actions/.github/workflows/reusable-pre-commit-update.yml@8465086d84a8ae8fb993ef582f00cf13b8ceb9c8 # v7.1.0

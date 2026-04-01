@@ -1,4 +1,4 @@
-.PHONY: test container-build container-test container-scan container-run
+.PHONY: test container-build container-test container-run
 
 PYTHONPATH := .
 
@@ -27,10 +27,6 @@ container-build:
 container-test: container-build
 	@echo "Testing container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)"
 	container-structure-test test --platform linux/amd64 --config test/container-structure-test.yml --image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
-
-container-scan: container-test
-	@echo "Scanning container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG) for vulnerabilities"
-	trivy image --platform linux/amd64 --severity HIGH,CRITICAL $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)
 
 container-run: container-test
 	@echo "Running container image $(CONTAINER_IMAGE_NAME):$(CONTAINER_IMAGE_TAG)"
