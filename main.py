@@ -25,7 +25,7 @@ pagerduty_client = RestApiV2Client(pagerduty_token)
 slack_client = WebClient(token=slack_token)
 
 # EM Data Hub shift-based V3 schedule.
-em_data_hub_schedule_id = "P4M9I3U"
+EM_DATA_HUB_SCHEDULE_ID = "P4M9I3U"
 
 
 def get_on_call_schedule_name():
@@ -223,7 +223,7 @@ def main():
 
     # EM Data Hub uses a V3 shift-based schedule which can have both a
     # primary engineer and a shadowing engineer.
-    if pagerduty_schedule_id == em_data_hub_schedule_id:
+    if pagerduty_schedule_id == EM_DATA_HUB_SCHEDULE_ID:
         primary_user_id, shadow_user_id = get_em_support_users()
 
         if primary_user_id is None:

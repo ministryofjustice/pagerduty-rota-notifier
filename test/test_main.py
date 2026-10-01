@@ -221,7 +221,7 @@ def test_main_em_with_shadow(
     with patch.object(
         main,
         "pagerduty_schedule_id",
-        main.em_data_hub_schedule_id,
+        main.EM_DATA_HUB_SCHEDULE_ID,
     ):
         main.main()
 
@@ -255,7 +255,7 @@ def test_main_em_without_shadow(
     with patch.object(
         main,
         "pagerduty_schedule_id",
-        main.em_data_hub_schedule_id,
+        main.EM_DATA_HUB_SCHEDULE_ID,
     ):
         main.main()
 
