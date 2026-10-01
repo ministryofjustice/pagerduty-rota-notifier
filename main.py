@@ -81,11 +81,11 @@ def get_on_call_user():
             # Look for the e‑mail address whose contact‑method label is “Default”
             for cm in user_detail_response.json()["user"].get("contact_methods", []):
                 if cm.get("label") == "Default":
-                    # “address” holds the e-mail value
+                    # “address” holds the e‑mail value
                     user_email = cm.get("address")
                     break
 
-        # If no “Default” label was found, fall back to the user’s primary e-mail
+        # If no “Default” label was found, fall back to the user’s primary e‑mail
         if user_email is None:
             user_email = user.get("email")
 
@@ -110,6 +110,7 @@ def get_slack_user_id():
     return user_id
 
 
+# EM V3 schedule migration
 def get_em_support_users():
     """
     Fetches the primary and optional shadowing engineer from the
