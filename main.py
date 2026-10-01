@@ -111,6 +111,21 @@ def get_slack_user_id():
 
 
 # EM V3 schedule migration
+def get_em_shadow_rotation_ids(schedule):
+    """
+    Returns the rotation IDs used for EM shadowing.
+    """
+    shadow_rotation_ids = set()
+
+    for rotation in schedule.get("rotations", []):
+        for event in rotation.get("events", []):
+            if event.get("name", "").startswith("Shadow "):
+                shadow_rotation_ids.add(rotation["id"])
+                break
+
+    return shadow_rotation_ids
+
+
 def get_em_support_users():
     """
     Fetches the primary and optional shadowing engineer from the
@@ -126,52 +141,42 @@ def get_em_support_users():
         time(hour=9),
         tzinfo=london_timezone,
     )
-    support_end = support_start + timedelta(minutes=1)
 
     params = {
         "since": support_start.isoformat(),
-        "until": support_end.isoformat(),
+        "until": (support_start + timedelta(minutes=1)).isoformat(),
         "time_zone": "Europe/London",
         "include[]": "final_schedule",
     }
-    query_string = urlencode(params)
 
     response = pagerduty_client.get(
-        f"/v3/schedules/{pagerduty_schedule_id}?{query_string}"
+        f"/v3/schedules/{pagerduty_schedule_id}?{urlencode(params)}"
     )
 
     if not (getattr(response, "ok", None) or getattr(response, "is_success", None)):
         return None, None
 
     schedule = response.json()["schedule"]
-
-    shadow_rotation_ids = set()
-
-    for rotation in schedule.get("rotations", []):
-        for event in rotation.get("events", []):
-            if event.get("name", "").startswith("Shadow "):
-                shadow_rotation_ids.add(rotation["id"])
-                break
+    shadow_rotation_ids = get_em_shadow_rotation_ids(schedule)
 
     primary_user_id = None
     shadow_user_id = None
 
-    assignments = schedule.get("final_schedule", {}).get(
+    for assignment in schedule.get("final_schedule", {}).get(
         "computed_shift_assignments",
         [],
-    )
-
-    for assignment in assignments:
+    ):
         member = assignment.get("member") or {}
 
         if member.get("type") != "user_member":
             continue
 
         user_id = member.get("user_id")
-        rotation_id = (assignment.get("source") or {}).get("rotation_id")
 
         if not user_id:
             continue
+
+        rotation_id = (assignment.get("source") or {}).get("rotation_id")
 
         if rotation_id in shadow_rotation_ids:
             shadow_user_id = user_id
