@@ -30,8 +30,6 @@ jobs:
             slack-channel: C05RQCR5JTH # dmet-analytics-engineering
           - pagerduty-schedule-id: PHEKY21 # Analytics Engineering Support G7
             slack-channel: C05RQCR5JTH # dmet-analytics-engineering
-          - pagerduty-schedule-id: P3MCA8L # em-data-hub-rpta
-            slack-channel: C069RF589V4 # em-engineers-moj-madetech
           - pagerduty-schedule-id: PF2LL87 # Infrastructure Automation Team Support In Hours Test
             slack-channel: C09FJNE3WD6 # iat-test
     steps:
