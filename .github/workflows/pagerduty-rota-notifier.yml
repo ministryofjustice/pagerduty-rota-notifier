@@ -3,7 +3,8 @@ name: 📟 PagerDuty Rota Notifier
 
 on:
   schedule:
-    - cron: "0 7 * * 1-5" # Monday-Friday at 07:00 UTC
+    - cron: "0 8 * * 1-5"
+      timezone: "Europe/London"
   workflow_dispatch:
 
 permissions: {}
